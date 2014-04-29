@@ -10,6 +10,7 @@ public class Banco {
 
 	public static void main(String[] args) 
 	{
+	
 		while(true){		do{			baransuu = 0;			if(tryed %50000 == 0)				System.out.println("Apple!");
 		try 
 	    {
