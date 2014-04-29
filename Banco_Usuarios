@@ -13,13 +13,14 @@ public class Banco {
 	
 		while(true){		do{			baransuu = 0;			if(tryed %50000 == 0)				System.out.println("Apple!");
 		try 
-	    {
+	        {
 			BufferedReader bufferRead = new BufferedReader(new FileReader("C:\\Users\\Angel\\Downloads\\SO.txt"));
 			StringBuilder sb = new StringBuilder();
 	        String line = bufferRead.readLine();
 	        ArrayList<String> lines = new ArrayList<String>();
-	        while (line != null) {
-	        	lines.add(line);
+	        while (line != null) 
+	        {
+	            lines.add(line);
 	            sb.append(line);
 	            sb.append(System.lineSeparator());
 	            line = bufferRead.readLine();
