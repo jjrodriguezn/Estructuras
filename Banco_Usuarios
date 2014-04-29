@@ -1,21 +1,19 @@
-package BancoSemaforo;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
 
 public class Banco {
 
 	public static void main(String[] args) 
 	{
-		while(true){		do{			bankBalance = 0;			if(tryed %50000 == 0)				System.out.println("Apple!");
+		while(true){		do{			baransuu = 0;			if(tryed %50000 == 0)				System.out.println("Apple!");
 		try 
 	    {
-			BufferedReader bufferRead = new BufferedReader(new FileReader("C:\\Users\\JHONATTAN\\Desktop\\punto1.txt"));
+			BufferedReader bufferRead = new BufferedReader(new FileReader("C:\\Users\\Angel\\Downloads\\SO.txt"));
 			StringBuilder sb = new StringBuilder();
 	        String line = bufferRead.readLine();
 	        ArrayList<String> lines = new ArrayList<String>();
@@ -65,48 +63,71 @@ public class Banco {
 				transBla.add(aux);
 				numBla--;
 			}*/
-			BankUser Antonio = new BankUser(transAnt, "Antonio");
-			Antonio.start();
-			BankUser Blanca = new BankUser(transBla, "Blanca");
-			Blanca.start();
-			Blanca.join();
-			Antonio.join();
-//			for(int a = 0; a < 1000000; a++)
-//			{
-//				bankBalance = bankBalance + 1;
-//				bankBalance = bankBalance - 1;
-//			}
 //			System.out.println("Zaaa baransuuuu " + bankBalance);
-			//Blanca.join();
-			//Antonio.join();
-			//System.out.println("Zaaa baransuuuu " + bankBalance);
+			
+			ActorSystem system=ActorSystem.create("Hola");
+			//Props p1 = Props.create(HelloActor.class);
+			ActorRef helloActor = system.actorOf(Props.create(BankUser.class), "holi");
+			ActorRef helloActor2 = system.actorOf(Props.create(BankUser.class), "Jo!");
+			helloActor.tell(transAnt,null);
+			helloActor2.tell(transBla,null);
+//			System.out.println(baransuu);
+			system.shutdown();
+			system.awaitTermination();//JOIN
 			tryed++;
 		} 
 		catch (Exception e) 
 		{
 			System.out.println("Stuf happened, baaaad stuff");
 		}
-		}while(bankBalance == 42);		catched++;System.out.println("Kukuku, an error happenedest to thy sum "+bankBalance+"\n"+catched+" out of "+tryed);}
+		}while(baransuu == 42);		catched++;System.out.println("Kukuku, an error happenedest to thy sum "+baransuu+"\n"+catched+" out of "+tryed);}
 	}
 	
-	public static void waiter()
+	public static void modifyBalance(Integer i)
 	{
-		while(s<=0)
-		{
-			
-		}
-		s--;
+		baransuu+=i;
 	}
 	
-	public static void signal()
+	private static int baransuu = 0;
+	private static int catched = 0;
+	private static int tryed = 0;
+	
+}
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////NEW/////////////////////////////////////////////////////
+/////////////////////////////////CLASS////////////////////////////////////////////////////
+
+
+import java.util.ArrayList;
+
+import akka.actor.UntypedActor;
+import akka.event.Logging;
+import akka.event.LoggingAdapter;
+
+class BankUser extends UntypedActor
+{
+	
+	LoggingAdapter log = Logging.getLogger(getContext().system(), this);
+	
+	@Override
+	public void onReceive(Object message) throws Exception 
 	{
-		s++;
-	}
-	
-	public static Integer bankBalance = 0;
-	public static boolean criticalZone = false;
-	
-	static int s = 1;
-	static int tryed = 0;
-	static int catched = 0;
+		ArrayList<Integer> orders = (ArrayList<Integer>)message;
+        for(int variableInFor = 0; variableInFor < orders.size(); variableInFor++)
+        {
+        	Banco.modifyBalance(orders.get(variableInFor));
+//        	int temp = Banco.bankBalance;
+//        	temp = temp + operations.get(variableInFor);
+//        	Banco.bankBalance = temp;
+//        	Banco.signal();
+        }
+
+	}	
 }
