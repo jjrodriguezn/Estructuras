@@ -1,0 +1,112 @@
+package BancoSemaforo;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class Banco {
+
+	public static void main(String[] args) 
+	{
+		while(true){		do{			bankBalance = 0;			if(tryed %50000 == 0)				System.out.println("Apple!");
+		try 
+	    {
+			BufferedReader bufferRead = new BufferedReader(new FileReader("C:\\Users\\JHONATTAN\\Desktop\\punto1.txt"));
+			StringBuilder sb = new StringBuilder();
+	        String line = bufferRead.readLine();
+	        ArrayList<String> lines = new ArrayList<String>();
+	        while (line != null) {
+	        	lines.add(line);
+	            sb.append(line);
+	            sb.append(System.lineSeparator());
+	            line = bufferRead.readLine();
+	        }
+	        String everything = sb.toString();
+	        //System.out.println(everything);
+			Integer numAnt = Integer.parseInt(lines.get(0));
+			Integer numBla = Integer.parseInt(lines.get(1));
+			lines.remove(0);
+			lines.remove(0);
+			ArrayList<Integer> transAnt = new ArrayList<>();
+			ArrayList<Integer> transBla = new ArrayList<>();
+			while(numAnt>0)
+			{
+				Integer aux = Integer.parseInt(lines.get(0));
+				lines.remove(0);
+				transAnt.add(aux);
+				numAnt--;
+			}
+			while(numBla>0)
+			{
+				Integer aux = Integer.parseInt(lines.get(0));
+				lines.remove(0);
+				transBla.add(aux);
+				numBla--;
+			}
+		
+			/*Scanner scan = new Scanner(System.in);
+			Integer numAnt = scan.nextInt();
+			Integer numBla = scan.nextInt();
+			ArrayList<Integer> transAnt = new ArrayList<>();
+			ArrayList<Integer> transBla = new ArrayList<>();
+			while(numAnt>0)
+			{
+				int aux = scan.nextInt();
+				transAnt.add(aux);
+				numAnt--;
+			}
+			while(numBla>0)
+			{
+				int aux = scan.nextInt();
+				transBla.add(aux);
+				numBla--;
+			}*/
+			BankUser Antonio = new BankUser(transAnt, "Antonio");
+			Antonio.start();
+			BankUser Blanca = new BankUser(transBla, "Blanca");
+			Blanca.start();
+			Blanca.join();
+			Antonio.join();
+//			for(int a = 0; a < 1000000; a++)
+//			{
+//				bankBalance = bankBalance + 1;
+//				bankBalance = bankBalance - 1;
+//			}
+//			System.out.println("Zaaa baransuuuu " + bankBalance);
+			//Blanca.join();
+			//Antonio.join();
+			//System.out.println("Zaaa baransuuuu " + bankBalance);
+			tryed++;
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("Stuf happened, baaaad stuff");
+		}
+		}while(bankBalance == 42);		catched++;System.out.println("Kukuku, an error happenedest to thy sum "+bankBalance+"\n"+catched+" out of "+tryed);}
+	}
+	
+	public static void waiter()
+	{
+		while(s<=0)
+		{
+			
+		}
+		s--;
+	}
+	
+	public static void signal()
+	{
+		s++;
+	}
+	
+	public static Integer bankBalance = 0;
+	public static boolean criticalZone = false;
+	
+	static int s = 1;
+	static int tryed = 0;
+	static int catched = 0;
+}
